@@ -1,0 +1,15 @@
+$directory = "C:\Users\Magmonix\Documents\work"
+$files = Get-ChildItem $directory | Where-Object name -like 'sampleIIS'
+$outputFile = "sampleLog.txt"
+
+foreach($file in $files)
+{
+    $content = Get-Content ($directory+$file)
+    foreach($line in $content)
+    {
+        if ($line -like 'img')
+        {
+            Add-Content ($directory+$outputFile) $line
+        }
+    }
+}
